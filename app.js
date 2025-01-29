@@ -13,11 +13,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.set("view engine", "jade");
 // Раздавать статические файлы из папки 'uploads'
-app.use("./uploads", express.static("uploads"));
+app.use("/uploads", express.static("uploads"));
 
 app.use("/api", require("./routes"));
 
-if (fs.existsSync("uploads")) {
+if (!fs.existsSync("uploads")) {
   fs.mkdirSync("uploads");
 }
 // catch 404 and forward to error handler
