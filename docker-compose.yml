@@ -15,3 +15,13 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
+  prisma-studio:
+    build: .
+    image: node:lts-alpine3.17
+    command: npx prisma studio --port 5555 --browser none
+    ports:
+      - "5555:5555"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "mongodb://admin:admin@db:27017/mydatabase?authSource=admin&directConnection=true"
